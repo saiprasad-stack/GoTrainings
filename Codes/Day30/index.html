@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker : Cheat Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #f8f9fc;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 2rem 2rem 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #0c4e6e, #1e7b9e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+
+        .subhead {
+            color: #4a627a;
+            border-left: 4px solid #0c4e6e;
+            padding-left: 1rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            color: #0f2b3d;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: #1e4a6e;
+            background: #f0f4f9;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .command-block {
+            background: #1e2a36;
+            color: #e2e8f0;
+            border-radius: 12px;
+            margin: 1rem 0 1.2rem 0;
+            overflow-x: auto;
+        }
+
+        .command-block pre {
+            margin: 0;
+            padding: 1rem 1.2rem;
+            font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .command-label {
+            background: #0f172a;
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 1px solid #2d3a48;
+        }
+
+        .sample-output {
+            background: #f1f5f9;
+            border-left: 4px solid #0c4e6e;
+            margin: 1rem 0 1.5rem 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #0f2b3d;
+            overflow-x: auto;
+        }
+
+        .sample-output pre {
+            margin: 0;
+            font-family: inherit;
+            white-space: pre-wrap;
+        }
+
+        .step-note {
+            background: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border-left: 3px solid #1e7b9e;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #e2e8f0, transparent);
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c86a3;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .command-block pre {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🐳 Docker:Cheat Sheet</h1>
+        <!-- ======================== STEP 1: VERIFY ======================== -->
+        <h2>1. Verify Docker Installation</h2>
+        <div class="command-block">
+            <div class="command-label">COMMAND</div>
+            <pre><code>docker --version</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Docker version 24.0.7, build afdd53b</pre>
+        </div>
+        <div class="command-block">
+            <div class="command-label">COMMAND</div>
+            <pre><code>docker run hello-world</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Hello from Docker!
+This message shows that your installation appears to be working correctly.</pre>
+        </div>
+
+        <!-- ======================== STEP 2: PULL IMAGE ======================== -->
+        <h2>2. Pull an Image from Docker Hub</h2>
+        <div class="command-block">
+            <div class="command-label">COMMAND</div>
+            <pre><code>docker pull nginx:latest</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>latest: Pulling from library/nginx
+a2abf6c4d29d: Pull complete
+Digest: sha256:...
+Status: Downloaded newer image for nginx:latest</pre>
+        </div>
+
+        <!-- ======================== STEP 3: RUN FOREGROUND ======================== -->
+        <h2>3. Run a Container in the Foreground</h2>
+        <div class="command-block">
+            <div class="command-label">COMMAND</div>
+            <pre><code>docker run nginx</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty...</pre>
+        </div>
+        <div class="step-note">📌 Press <kbd>Ctrl+C</kbd> to stop the container.</div>
+
+        <!-- ======================== STEP 4: DETACHED MODE ======================== -->
+        <h2>4. Run a Container in Detached Mode (Background)</h2>
+        <div class="command-block">
+            <div class="command-label">COMMAND</div>
+            <pre><code>docker run -d --name my-nginx nginx</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>abc123def456789...</pre>
+        </div>
+        <div class="step-note">📌 The container keeps running even after closing the terminal.</div>
+
+        <!-- ======================== STEP 5: LIST CONTAINERS ======================== -->
+        <h2>5. List Containers</h2>
+        <h3>Running containers</h3>
+        <div class="command-block">
+            <pre><code>docker ps</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
+abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   80/tcp    my-nginx</pre>
+        </div>
+        <h3>All containers (including stopped)</h3>
+        <div class="command-block">
+            <pre><code>docker ps -a</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>CONTAINER ID   IMAGE         COMMAND                  STATUS                     NAMES
+abc123def456   nginx         "/docker-entrypoint.…"   Up 2 minutes               my-nginx
+def456abc789   hello-world   "/hello"                 Exited (0) 5 minutes ago   wonderful_gates</pre>
+        </div>
+
+        <!-- ======================== STEP 6: LOGS ======================== -->
+        <h2>6. View Container Logs</h2>
+        <div class="command-block">
+            <pre><code>docker logs my-nginx</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty...
+2024/04/01 12:34:56 [notice] 1#1: start worker process 30</pre>
+        </div>
+        <div class="step-note">Add <code>-f</code> to follow logs in real time: <code>docker logs -f my-nginx</code>
+        </div>
+
+        <!-- ======================== STEP 7: EXEC ======================== -->
+        <h2>7. Execute Commands Inside a Container</h2>
+        <div class="command-block">
+            <pre><code>docker exec -it my-nginx bash</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>root@abc123:/# ls
+bin  boot  dev  etc  home  ...</pre>
+        </div>
+        <div class="step-note">Type <code>exit</code> to leave the shell without stopping the container.</div>
+
+        <!-- ======================== STEP 8: STOP/START/RESTART ======================== -->
+        <h2>8. Stop, Start, Restart Containers</h2>
+        <div class="command-block">
+            <pre><code>docker stop my-nginx
+docker start my-nginx
+docker restart my-nginx</code></pre>
+        </div>
+
+        <!-- ======================== STEP 9: PORT MAPPING ======================== -->
+        <h2>9. Map Host Ports to Container Ports</h2>
+        <div class="step-note">First, stop and remove the existing container:</div>
+        <div class="command-block">
+            <pre><code>docker stop my-nginx
+docker rm my-nginx</code></pre>
+        </div>
+        <div class="step-note">Now run a new container with port mapping:</div>
+        <div class="command-block">
+            <pre><code>docker run -d --name my-nginx -p 8080:80 nginx</code></pre>
+        </div>
+        <div class="step-note">🌐 Open <code>http://localhost:8080</code> in your browser – you'll see the Nginx welcome
+            page.</div>
+
+        <!-- ======================== STEP 10: VOLUMES (PERSISTENCE) ======================== -->
+        <h2>10. Use Docker Volumes (Persistent Data)</h2>
+        <h3>Create a volume</h3>
+        <div class="command-block">
+            <pre><code>docker volume create my-data</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>my-data</pre>
+        </div>
+        <h3>Mount it to a container</h3>
+        <div class="command-block">
+            <pre><code>docker run -d --name data-container -v my-data:/data alpine sleep infinity</code></pre>
+        </div>
+        <h3>Write a file inside the container</h3>
+        <div class="command-block">
+            <pre><code>docker exec data-container sh -c "echo Hello > /data/test.txt"</code></pre>
+        </div>
+        <h3>Verify persistence after container removal</h3>
+        <div class="command-block">
+            <pre><code>docker stop data-container && docker rm data-container
+docker run --rm -v my-data:/data alpine cat /data/test.txt</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Hello</pre>
+        </div>
+
+        <!-- ======================== STEP 11: BIND MOUNTS ======================== -->
+        <h2>11. Bind Mount a Host Directory</h2>
+        <div class="command-block">
+            <pre><code>mkdir -p ./html
+echo "&lt;h1&gt;Hello from bind mount&lt;/h1&gt;" > ./html/index.html
+docker run -d --name dev-nginx -v $(pwd)/html:/usr/share/nginx/html -p 8081:80 nginx</code></pre>
+        </div>
+        <div class="step-note">📁 Visit <code>http://localhost:8081</code> to see your custom HTML.</div>
+
+        <!-- ======================== STEP 12: ENVIRONMENT VARIABLES ======================== -->
+        <h2>12. Set Environment Variables</h2>
+        <div class="command-block">
+            <pre><code>docker run -d --name mysql-db -e MYSQL_ROOT_PASSWORD=secret mysql:8</code></pre>
+        </div>
+        <div class="step-note">The variable <code>MYSQL_ROOT_PASSWORD</code> is available inside the container.</div>
+
+        <!-- ======================== STEP 13: INSPECT ======================== -->
+        <h2>13. Inspect a Container (Detailed JSON)</h2>
+        <div class="command-block">
+            <pre><code>docker inspect my-nginx</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>[{
+  "Id": "abc123def456...",
+  "State": { "Status": "running", "Pid": 1234 },
+  ...
+}]</pre>
+        </div>
+
+        <!-- ======================== STEP 14: PAUSE / UNPAUSE ======================== -->
+        <h2>14. Pause and Unpause a Container</h2>
+        <div class="command-block">
+            <pre><code>docker pause my-nginx
+docker unpause my-nginx</code></pre>
+        </div>
+
+        <!-- ======================== STEP 15: REMOVE CONTAINERS ======================== -->
+        <h2>15. Remove Containers</h2>
+        <div class="command-block">
+            <pre><code>docker rm my-nginx          # works only if stopped
+docker rm -f my-nginx       # force stop and remove</code></pre>
+        </div>
+
+        <!-- ======================== STEP 16: REMOVE IMAGES ======================== -->
+        <h2>16. Remove Images</h2>
+        <h3>List images</h3>
+        <div class="command-block">
+            <pre><code>docker images</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>REPOSITORY     TAG       IMAGE ID       CREATED         SIZE
+myapp          1.0       abc123def456   2 hours ago     350MB
+nginx          latest    ghi789jkl012   3 days ago      142MB</pre>
+        </div>
+        <h3>Remove an image</h3>
+        <div class="command-block">
+            <pre><code>docker rmi nginx:latest</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Untagged: nginx:latest
+Deleted: sha256:abc123...</pre>
+        </div>
+
+        <!-- ======================== STEP 17: CLEANUP ======================== -->
+        <h2>17. Clean Up Unused Resources</h2>
+        <h3>Basic prune (containers, networks, dangling images, build cache)</h3>
+        <div class="command-block">
+            <pre><code>docker system prune</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Containers: ...
+Total reclaimed space: 123.4MB</pre>
+        </div>
+        <h3>Prune everything including all unused images and volumes</h3>
+        <div class="command-block">
+            <pre><code>docker system prune -a --volumes</code></pre>
+        </div>
+
+        <!-- ======================== STEP 18: DOCKER COMPOSE ======================== -->
+        <h2>18. Multi‑Container Apps with Docker Compose</h2>
+        <div class="step-note">Create a <code>docker-compose.yml</code> file:</div>
+        <div class="command-block">
+            <pre><code>cat > docker-compose.yml <<EOF
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+EOF</code></pre>
+        </div>
+        <h3>Start services in the background</h3>
+        <div class="command-block">
+            <pre><code>docker-compose up -d</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Creating network "default" with the default driver
+Creating compose_web_1 ... done
+Creating compose_db_1  ... done</pre>
+        </div>
+        <h3>List services</h3>
+        <div class="command-block">
+            <pre><code>docker-compose ps</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>Name                Command               State          Ports
+compose_db_1   docker-entrypoint.sh postgres    Up      5432/tcp
+compose_web_1  /docker-entrypoint.sh ngin ...   Up      0.0.0.0:8080->80/tcp</pre>
+        </div>
+        <h3>View logs of a specific service</h3>
+        <div class="command-block">
+            <pre><code>docker-compose logs web</code></pre>
+        </div>
+        <h3>Stop and remove everything (including networks)</h3>
+        <div class="command-block">
+            <pre><code>docker-compose down -v</code></pre>
+        </div>
+
+        <!-- ======================== STEP 19: ADDITIONAL USEFUL COMMANDS ======================== -->
+        <h2>19. Additional Useful Commands</h2>
+        <h3>Live resource usage stats</h3>
+        <div class="command-block">
+            <pre><code>docker stats</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     NET I/O
+abc123def456   my-nginx     0.02%     12.34MiB / 7.789GiB   1.2kB / 456B</pre>
+        </div>
+        <h3>Copy files between host and container</h3>
+        <div class="command-block">
+            <pre><code>docker cp ./index.html my-nginx:/usr/share/nginx/html/
+docker cp my-nginx:/var/log/nginx/access.log ./access.log</code></pre>
+        </div>
+
+        <!-- ======================== NETWORK & VOLUME BONUS (if needed) ======================== -->
+        <h2>20. Custom Network</h2>
+        <h3>Create a custom network</h3>
+        <div class="command-block">
+            <pre><code>docker network create mynet</code></pre>
+        </div>
+        <div class="sample-output">
+            <pre>abc123def456789...</pre>
+        </div>
+        <h3>List networks</h3>
+        <div class="command-block">
+            <pre><code>docker network ls</code></pre>
+        </div>
+        <h3>Connect a container to a network</h3>
+        <div class="command-block">
+            <pre><code>docker network connect mynet my_container</code></pre>
+        </div>
+        <h3>Volume commands (manage named volumes)</h3>
+        <div class="command-block">
+            <pre><code>docker volume ls
+docker volume inspect myvol
+docker volume rm myvol</code></pre>
+        </div>
+        <footer>
+            ⚡ <strong>Made by: Arvinder Pal</strong> — Golang Training
+        </footer>
+    </div>
+</body>
+
+</html>
