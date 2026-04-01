@@ -1,0 +1,4 @@
+This is a File for Golang 
+File Operations
+Lines: 2
+Bytes: 42
